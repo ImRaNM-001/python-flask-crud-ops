@@ -1,0 +1,30 @@
+<h1>Hello {{ name }}</h1>
+
+<p>Name is changed ----> {{ name | upper }}</p>
+
+<p>Name is changed again ----> {{ name | capitalize }}</p>
+
+<p>{{ some_stuff | safe }}</p>
+
+
+<p>{{ some_stuff | striptags }}</p>
+
+
+<p>{{ some_stuff | striptags | title }}</p>
+
+
+<h3>Fav Pizza:</h3>
+
+{% for topping in fav_pizza %}
+    <li>{{ topping}}</li>
+{% endfor%}
+
+<br></br>
+
+{{ fav_pizza.1 + ' 10' }}                <!-- number wrapped in quotes becomes a string -->
+<br></br>
+{{ fav_pizza.1, '10' }}                 <!-- creates a string tuple -->
+<br></br>
+{{ fav_pizza.2 + ' ' + 300 | string }}        <!-- used pipe with string fn converts int to a string -->
+
+

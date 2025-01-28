@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>{% if title %}
+                {{ title}}
+            {% else %}
+                Just a title less normal page
+            {% endif %}
+    </title>
+</head>
+
+<body>
+    <div class="container">
+        <h1>About Me.....</h1>
+        <p>{{ names }}</p>
+        <p>{{ names.3 }}</p>
+        <ol>
+            {% for name in names %}
+                <li>{{ name }}</li>
+            {% endfor%}
+        </ol>
+        <ul>Printing un-ordered lists -->
+            {% for name in names %}
+                <li>{{ name }}</li>
+            {% endfor %}
+        </ul>
+        <p>
+            {% for name in names %}
+                {% if name == 'Hanah' %}
+                    <li>{{ name }} is present in the list of names</li>
+                {% else %}
+                    <li>{{ name }}</li>
+                {% endif %}
+            {% endfor %}
+        </p>
+    </div>
+</body>
+
+</html>
