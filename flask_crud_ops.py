@@ -1,3 +1,4 @@
+import os
 from flask import Flask, Response, request, jsonify, make_response
 
 """
@@ -10,10 +11,10 @@ items: list[dict[str, str | int]] = [{
     'name': 'Item 1',
     'description': 'This is item 1'
 },
-    {
-        'id': 2,
-        'name': 'Item 2',
-        'description': 'This is item 2'
+{
+    'id': 2,
+    'name': 'Item 2',
+    'description': 'This is item 2'
 }]
 app: Flask = Flask(__name__)
 
@@ -31,6 +32,7 @@ def get_an_item(item_id: int) -> Response:
     for item in items:
         if item.get('id') == item_id:
             return jsonify(item)
+        
     return make_response(jsonify({
         'Error': 'Item not found'
     }), 404)
@@ -43,15 +45,15 @@ def create_item() -> Response:
     # Gets the JSON payload from the request body
     add_item: dict[str, int | str] = request.get_json()
 
-
     for key in ('id', 'name', 'description'):           # () is a tuple coz of 1st brackets
         if key not in add_item:                         # 1> Valdiates if the payload structure is right
             return make_response(jsonify({
                 'Error': 'Invalid payload structure, key names missed'
             }), 400)
- 
+    
         if key == 'id' and any(item['id'] == add_item['id']       # 2> Generator Expression inside any(): Checks if item with the entered "id" already exits
                                for item in items):
+            
             return make_response(jsonify({
                 'Error': f'The id: {add_item['id']} already exists, insert a different id'
             }), 409)       
@@ -92,7 +94,8 @@ def update_item(item_id: int) -> Response:
 
     for item in items:
         if item['id'] == item_id:
-            item.update(update_item)                            # updating existing dictonary "item" from top with my POSTMAN payload / body
+            item.update(update_item)                            # updating existing dictonary "item" from top with my POSTMAN payload / 
+            
             return jsonify({
                 'message': 'Item updated',
                 'item': item
@@ -103,7 +106,7 @@ def update_item(item_id: int) -> Response:
         }), 404)
 
 
-# To hell with optimization:
+# skipped for now - optimization:
 # def update_item(item_id: int) -> Response:
 #     update_item: dict[str, int | str] = request.get_json()
 
@@ -130,23 +133,15 @@ def delete_item(item_id: int) -> Response:
     # optimized code - where in I'm re-updating my original list named "items" with all dict whose key do not matches with deleted item_id
     items = [item for item in items 
              if item['id'] != item_id]
+    
     return make_response(jsonify({
         'message': 'item successfully deleted'
         }), 200)
-    
-    # boiler-plate code
-    # for i in range(len(items)):
-    #     if items[i]['id'] == item_id:
-    #         del items[i]
-    #         return make_response(jsonify({
-    #             'message': 'item successfully deleted'
-    #         }))
-
-    # return make_response(jsonify({
-    #     'Error': 'There is no such item'
-    # }), 404)
-
-
 
 if __name__ == '__main__':
-    app.run(debug=True, port = 3100)
+    app.run(debug = True, port = 3100)            # for localhost default (127.0.0.1) run
+    
+    # Flask app listens to 0.0.0.0 host running inside a Docker container
+    app.run(host = '0.0.0.0',
+            port = int(os.environ.get('PORT', 3100)), 
+            debug = True)
