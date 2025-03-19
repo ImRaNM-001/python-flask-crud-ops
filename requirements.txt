@@ -8,6 +8,7 @@ decorator==5.1.1
 executing==2.1.0
 Flask==3.1.0
 idna==3.10
+iniconfig==2.0.0
 ipython==8.31.0
 itsdangerous==2.2.0
 jedi==0.19.2
@@ -17,13 +18,16 @@ matplotlib-inline==0.1.7
 mypy==1.13.0
 mypy-extensions==1.0.0
 nbqa==1.9.1
+packaging==24.2
 parso==0.8.4
 pexpect==4.9.0
+pluggy==1.5.0
 prompt_toolkit==3.0.48
 ptyprocess==0.7.0
 pure_eval==0.2.3
 pycodestyle==2.12.1
 Pygments==2.18.0
+pytest==8.3.5
 python-dotenv==1.0.1
 requests==2.32.3
 stack-data==0.6.3
