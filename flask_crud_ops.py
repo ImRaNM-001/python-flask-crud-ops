@@ -139,7 +139,7 @@ def delete_item(item_id: int) -> Response:
         }), 200)
 
 if __name__ == '__main__':
-    app.run(debug = True, port = 3100)            # for localhost default (127.0.0.1) run
+    # app.run(debug = True, port = 3100)            # for localhost default (127.0.0.1) run
     
     # Flask app listens to 0.0.0.0 host running inside a Docker container
     app.run(host = '0.0.0.0',

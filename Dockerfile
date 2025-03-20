@@ -24,4 +24,8 @@ EXPOSE ${PORT}
 # Run the application
 ENTRYPOINT ["python3"]
 
+# for a typical localhost
 CMD ["flask_crud_ops.py"]
+
+# for prod servers
+# CMD ["gunicorn", "--bind", "0.0.0.0:3100", "--timeout", "120", "flask_crud_ops:app"]
